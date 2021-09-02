@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">
+        PHILIPE BLOG
+        </a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/categories">Categorias</a>
+            </li>
+        </ul>
+    </nav>
+    {%block content%}
+    {%endblock%}
+
+    <script src="/jquery-3.3.1.slim.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+    <script>
+        function confirmDelete(event, form) {
+            event.preventDefault();
+            let decision = confirm("Você tem a certeza que deseja Eliminar?");
+            if (decision) {
+                form.submit();
+            }
+        }
+    </script>
+</body>
+</html>
