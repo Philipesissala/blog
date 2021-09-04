@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const slug = require("../lib/slug-format");
+const slugify = require("../lib/slug-format");
 const Category = require("./Category");
 
 router.get("/admin/categories/new", (req, res) => {
@@ -14,9 +14,9 @@ router.post("/categories/save", (req, res) => {
   if (title != undefined) {
     Category.create({
       title,
-      slug: slug(title),
+      slug: slugify(title),
     }).then(() => {
-      res.redirect("/");
+      res.redirect("/admin/categories");
     });
   } else {
     res.redirect("/admin/categories/new");
@@ -35,7 +35,7 @@ router.get("/admin/categories", (req, res) => {
 
 router.post("/admin/categories/delete", (req, res) => {
   const id = req.body.id;
-  console.log(id)
+  console.log(id);
   if (id != undefined) {
     if (!isNaN(id)) {
       Category.destroy({
@@ -49,6 +49,33 @@ router.post("/admin/categories/delete", (req, res) => {
   } else {
     res.redirect("/admin/categories");
   }
+});
+
+router.get("/admin/categories/edit/:id", (req, res) => {
+  const id = req.params.id;
+  if (isNaN(id)) {
+    res.redirect("/admin/categories");
+  } else {
+    Category.findByPk(id)
+      .then((category) => {
+        if (category != undefined) {
+          res.render("admin/categories/edit", { category });
+        } else {
+          res.redirect("/admin/categories");
+        }
+      })
+      .catch((error) => {
+        res.redirect("/admin/categories");
+      });
+  }
+});
+
+router.post("/categories/update/:id", (req, res) => {
+  const id = req.params.id;
+  const title = req.body.title;
+  Category.update({ title, slug:slugify(title) }, { where: { id } }).then(() => {
+    res.redirect("/admin/categories");
+  });
 });
 
 module.exports = router;
