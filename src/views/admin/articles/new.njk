@@ -13,7 +13,15 @@
                     <input class="form-control" type="text" name="title" placeholder="Insira o titulo do artigo">
                 </div>
                 <div class="form-group">
-                    <textarea  class="form-control"name="body" placeholder="Escreva o artigo aqui"></textarea>
+                    <label for="category">Categorias</label>
+                    <select name="categoryId" id="category" class="form-control">
+                        {%for category in categories%}
+                            <option value="{{category.id}}">{{category.title}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea  id="article" class="form-control"name="body" placeholder="Escreva o artigo aqui"></textarea>
                 </div>
                 <button class="btn btn-success">Cadastrar</button>
             </form>
