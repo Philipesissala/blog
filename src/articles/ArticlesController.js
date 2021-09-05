@@ -5,7 +5,11 @@ const Article = require("./Article");
 const slugify = require("../lib/slug-format");
 
 router.get("/admin/articles", (req, res) => {
-  res.send("ROTAS DE ARTIGOS");
+  Article.findAll({
+    include: [{ model: Category }],
+  }).then((articles) => {
+    res.render("admin/articles/index", { articles });
+  });
 });
 
 router.get("/admin/articles/new", (req, res) => {
