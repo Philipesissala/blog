@@ -4,7 +4,7 @@
     <div class="container">
         <hr>
         <h2>Artigos</h2>
-        <a href="/admin/article/new" class="btn btn-success">Criar novo artigo</a>
+        <a href="/admin/articles/new" class="btn btn-success">Criar novo artigo</a>
         <hr>
         <table class="table table-bordered">
             <thead>
@@ -24,9 +24,10 @@
                         <td>{{article.slug}}</td>
                         <td>{{article.category.title}}</td>
                         <td>
-                        <a href="/admin/categories/edit/{{category.id}}" class="btn btn-warning">Editar</a>
-                        <form action="/admin/categories/delete" method="POST" id="formDelete" onSubmit="confirmDelete(event,this)" style="display: inline">
-                            <input type="hidden" name="id" value="{{category.id}}">
+                        <a href="/categories/edit/{{category.id}}" class="btn btn-warning">Editar</a>
+
+                        <form action="/articles/delete" method="POST" id="formDelete" onSubmit="confirmDelete(event,this)" style="display: inline">
+                            <input type="hidden" name="id" value="{{article.id}}">
                             <button class="btn btn-danger">Eliminar</button>
                         </form>
                     </td>

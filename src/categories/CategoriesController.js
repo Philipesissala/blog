@@ -10,7 +10,6 @@ router.get("/admin/categories/new", (req, res) => {
 
 router.post("/categories/save", (req, res) => {
   const title = req.body.title;
-  console.log(title);
   if (title != undefined) {
     Category.create({
       title,
