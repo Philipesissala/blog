@@ -24,8 +24,8 @@ router.post("/categories/save", (req, res) => {
 
 router.get("/admin/categories", (req, res) => {
   Category.findAll()
-    .then((datas) => {
-      res.render("admin/categories/index", { categories: datas });
+    .then((categories) => {
+      res.render("admin/categories/index", { categories });
     })
     .catch((error) => {
       res.send(`Erro ao tentar listar as categorias ${error}`);

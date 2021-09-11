@@ -1,5 +1,49 @@
-{%extends 'layout.njk'%}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a href="/" class="navbar-brand">
+            PHILIPE
+        </a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        {%block content%}
+        <hr>
+        <div class="jumbotron">
+            <h1 class="display-4">Bem vindo!</h1>
+            <p class="lead">Este é um simples blog desenvolvido por mim.</p>
+            <hr class="my-4">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci dolor aspernatur quisquam sapiente voluptatum! Exercitationem vero quisquam, similique soluta animi culpa voluptatem, impedit eos, veritatis minima sapiente molestiae aliquid sint..</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+        <hr>
+        {%for article in articles%}
+            <div class="card">
+                <div class="card-header">
+                    <h2>{{article.title}}</h2>
+                </div>
+                <div class="card-body">
+                {<a href="#" class="btn btn-success">Ler artigo</a>}
+                </div>
+            </div><br>
+        {%endfor%}
+        {%endblock%}
+    </div>
 
-{%block content%}
-<h1>Hello World</h1>
-{%endblock%}
+    <script src="/jquery-3.3.1.slim.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+    <script src="/tinymce/tinymce.min.js"></script>
+</body>
+</html>
