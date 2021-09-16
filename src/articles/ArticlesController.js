@@ -50,4 +50,25 @@ router.post("/articles/delete", (req, res) => {
   }
 });
 
+router.get("/admin/articles/edit/:id", (req, res) => {
+  const id = req.params.id;
+  if (isNaN(id)) {
+    res.redirect("/admin/articles");
+  } else {
+    Article.findByPk(id)
+      .then((article) => {
+        if (article != undefined) {
+          Category.findAll().then((categories) => {
+            res.render("admin/articles/edit", { article, categories });
+          });
+        } else {
+          res.redirect("/");
+        }
+      })
+      .catch((error) => {
+        res.redirect("/");
+      });
+  }
+});
+
 module.exports = router;
