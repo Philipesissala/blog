@@ -1,7 +1,7 @@
 const express = require("express");
+const slugify = require("slugify");
 const router = express.Router();
 
-const slugify = require("../lib/slug-format");
 const Category = require("./Category");
 
 router.get("/admin/categories/new", (req, res) => {
