@@ -24,7 +24,7 @@
                         <td>{{article.slug}}</td>
                         <td>{{article.category.title}}</td>
                         <td>
-                        <a href="/categories/edit/{{category.id}}" class="btn btn-warning">Editar</a>
+                        <a href="/admin/articles/edit/{{article.id}}" class="btn btn-warning">Editar</a>
 
                         <form action="/articles/delete" method="POST" id="formDelete" onSubmit="confirmDelete(event,this)" style="display: inline">
                             <input type="hidden" name="id" value="{{article.id}}">
