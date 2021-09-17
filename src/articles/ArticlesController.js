@@ -71,4 +71,22 @@ router.get("/admin/articles/edit/:id", (req, res) => {
   }
 });
 
+router.post("/articles/update/:id", (req, res) => {
+  const id = req.params.id;
+  const { title, body, categoryId } = req.body;
+
+  Article.update(
+    { title, slug: slugify(title), body, categoryId },
+    {
+      where: { id },
+    }
+  )
+    .then(() => {
+      res.redirect("/admin/articles");
+    })
+    .catch((err) => {
+      res.redirect("/");
+    });
+});
+
 module.exports = router;
