@@ -97,6 +97,7 @@ router.get("/articles/page/:number", (req, res) => {
   Article.findAndCountAll({
     limit: 4,
     offset,
+    order: [["id", "DESC"]],
   }).then((articles) => {
     if (offset + 4 >= articles.count) {
       next = false;
@@ -105,12 +106,12 @@ router.get("/articles/page/:number", (req, res) => {
     }
 
     let results = {
+      page: parseInt(page),
       next,
       articles,
     };
-    res.json(results);
     Category.findAll().then((categories) => {
-      //res.render("admin/articles/page", { results, categories });
+      res.render("admin/articles/page", { results, categories });
     });
   });
 });

@@ -1,9 +1,9 @@
-{%extends "../../layout.njk"%}
+{%extends "../../index.njk"%}
 
 {%block content%}
 <div class="container">
     <hr>
-    {%for article in articles.rows%}
+    {%for article in results.articles.rows%}
         <div class="card">
                 <div class="card-header">
                     <h2>{{article.title}}</h2>
@@ -13,5 +13,19 @@
             </div>
         </div><br>
     {%endfor%}
+
+    <div class="row">
+        <div class="col col-12">
+            {%if results.page < 2%}
+           {%else%}
+            <a style="float:left" href="/articles/page/{{results.page - 1}}"><<< Prev</a>
+            {%endif%}
+
+            {%if results.next%}
+            <a style="float:right" href="/articles/page/{{results.page + 1}}">Next >>></a>
+            {%endif%}
+        </div>
+    <hr>
+    </div>
 </div>
 {%endblock%}
