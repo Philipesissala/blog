@@ -91,30 +91,27 @@ router.post("/articles/update/:id", (req, res) => {
 
 router.get("/articles/page/:number", (req, res) => {
   const page = req.params.number;
-  let offset = 0;
-
-  if (isNaN(page) || page == 1) {
-    offset = 0;
-  } else {
-    offset = parseInt(page) * 4;
-  }
+  let offset = (page - 1) * 4;
+  let next;
 
   Article.findAndCountAll({
     limit: 4,
     offset,
   }).then((articles) => {
-    let next;
-
     if (offset + 4 >= articles.count) {
       next = false;
     } else {
       next = true;
     }
+
     let results = {
       next,
       articles,
     };
     res.json(results);
+    Category.findAll().then((categories) => {
+      //res.render("admin/articles/page", { results, categories });
+    });
   });
 });
 
