@@ -5,9 +5,11 @@ const app = express();
 
 const categoriesController = require("./categories/CategoriesController");
 const articlesController = require("./articles/ArticlesController");
+const usersController = require("./user/UserController");
 
 const Article = require("./articles/Article");
 const Category = require("./categories/Category");
+const Users = require("./user/User");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,6 +24,7 @@ nunjucks.configure("src/views", {
 
 app.use(categoriesController);
 app.use(articlesController);
+app.use(usersController);
 
 app.get("/", (req, res) => {
   Article.findAll({
