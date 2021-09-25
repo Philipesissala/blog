@@ -12,8 +12,8 @@ router.get("/admin/users/create", (req, res) => {
 
 router.post("/users/create", (req, res) => {
   const { email, password } = req.body;
-
-  res.json({ email, password });
+  res.render("admin/user/create");
+  //res.json({ email, password });
 });
 
 module.exports = router;
