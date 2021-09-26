@@ -1,5 +1,6 @@
 const express = require("express");
 const nunjucks = require("nunjucks");
+const session = require("express-session");
 
 const app = express();
 
@@ -13,6 +14,15 @@ const Users = require("./user/User");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(
+  session({
+    secret: "qualquercoisa",
+    cookie: { maxAge: 30000 },
+    resave:false,
+    saveUninitialized:true
+  })
+);
 
 app.set("view engine", "njk");
 app.use(express.static("public"));
