@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2>Login de Admin</h2>
+        </div>
+        <div class="card-body">
+            <form action="/authenticate" method="POST">
+                <input type="email" name="email" class="form-control" placeholder="email@example.com"><br>
+                <input type="password" name="password" class="form-control" placeholder="***********">
+                <button type="submit" class="btn btn-success btn-block">Logar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/jquery-3.3.1.slim.min.js"></script>
+    <script src="/bootstrap.min.js"></script>
+    <script src="/tinymce/tinymce.min.js"></script>
+    <script>
+        function confirmDelete(event, form) {
+            event.preventDefault();
+            let decision = confirm("Você tem a certeza que deseja Eliminar?");
+            if (decision) {
+                form.submit();
+            }
+        }
+    </script>
+    <script>
+        tinymce.init({
+            selector:"#article",
+            plugins:[
+                "advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste "
+            ]
+        })
+    </script>
+</body>
+</html>
