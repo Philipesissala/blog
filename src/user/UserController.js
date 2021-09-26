@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
+
 const User = require("./User");
+
+const bcrypt = require("bcryptjs");
 
 router.get("/admin/users", (req, res) => {
   res.send("Listagem de usuários");
@@ -12,8 +15,26 @@ router.get("/admin/users/create", (req, res) => {
 
 router.post("/users/create", (req, res) => {
   const { email, password } = req.body;
-  res.render("admin/user/create");
-  //res.json({ email, password });
+
+  User.findOne({ where: { email } }).then((user) => {
+    if (user == undefined) {
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
+
+      User.create({
+        email,
+        password: hash,
+      })
+        .then(() => {
+          res.redirect("/");
+        })
+        .catch((err) => {
+          res.redirect("/");
+        });
+    } else {
+      redirect("admin/users/create");
+    }
+  });
 });
 
 module.exports = router;
